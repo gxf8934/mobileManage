@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试机管理系统</title>
+    <script type="text/javascript" src="../static/jquery-3.5.1.js "></script>
+</head>
+<body>
+<h1>测试机管理系统</h1>
+<a href="http://127.0.0.1:5000/add_mobile">
+    <button>添加</button>
+
+
+</a>
+
+<table id="table" border="1" cellpadding="0" cellspacing="0" width="1000">
+    <tr bgcolor="#faebd7" align="center" style="height: 50px">
+        <td>设备名称</td>
+        <td>设备版本</td>
+        <td>设备颜色</td>
+        <td>设备价格</td>
+        <td>创建时间</td>
+        <td>更新时间</td>
+        <td>所属人</td>
+        <td>操作</td>
+    </tr>
+
+</table>
+
+<script>
+    window.onload = function () {
+        $.post("http://127.0.0.1:5000/select", {
+            state: '\'1\''
+        }, function (json) {
+            jsonresult = json.result
+            var table = document.getElementById("table");
+            for (var i = 0; i < jsonresult.length; i++) {
+
+                table.innerHTML = table.innerHTML +
+                    '<tr>' +
+                    '<td>' + jsonresult[i].mobile_name + '</td>' +
+                    '<td>' + jsonresult[i].mobile_model + '</td>' +
+                    '<td>' + jsonresult[i].mobile_color + '</td>' +
+                    '<td>' + jsonresult[i].mobile_price + '</td>' +
+                    '<td>' + jsonresult[i].createdAt + '</td>' +
+                    '<td>' + jsonresult[i].updatedAt + '</td>' +
+                    '<td>' + jsonresult[i].owner + '</td>' +
+                    '<td>' + '<input   data-index="' + jsonresult[i].id + '" class="btnDelete"  type="button" value="删除"/>' +
+                    '<input data-index="' + jsonresult[i].id + '"class="btnEdit" type="button" value="编辑" />' + '</td>' +
+                    '</tr>'
+
+            }
+        })
+        $('table').on('click', '.btnDelete', function () {
+
+            var b = confirm("您确认要删除该条数据吗？")
+            if (b == true) {
+
+                $.post("http://127.0.0.1:5000/delete", {
+                    id: $(this)[0].dataset.index,
+                }, function (json) {
+                    window.location.reload();
+                })
+            }
+        })
+        $('table').on('click', '.btnEdit', function () {
+            window.location.href = "http://127.0.0.1:5000/update_mobile?" + "id=" + $(this)[0].dataset.index;
+
+
+        })
+    }
+</script>
+</body>
+</html>

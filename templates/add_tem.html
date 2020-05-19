@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加</title>
+    <script type="text/javascript" src="../static/jquery-3.5.1.js "></script>
+</head>
+<body>
+
+<form>
+    <label>
+        设备名称：<input type="text" name="name"><br>
+        设备版本：<input type="text" name="model"><br>
+        设备颜色：<input type="text" name="color"><br>
+        设备价格：<input type="text" name="price"><br>
+        所属人：<input type="text" name="owner"><br>
+    </label>
+    <input type="submit" class="btnAdd">
+
+</form>
+
+</body>
+<script>
+    window.onload = function () {
+        console.log($(''))
+        $('form').on('click', '.btnAdd', function (e) {
+            e.preventDefault();
+            console.log('1111')
+
+            $.post("http://127.0.0.1:5000/add", {
+
+                name: $('[name="name"]').val(),
+                model: $('[name="model"]').val(),
+                color: $('[name="color"]').val(),
+                price: $('[name="price"]').val(),
+                owner: $('[name="owner"]').val()
+            }, function (json) {
+                window.location.href = "http://127.0.0.1:5000"
+            })
+        })
+    }
+</script>
+</html>

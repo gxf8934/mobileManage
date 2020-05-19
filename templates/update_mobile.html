@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑测试机</title>
+    <script type="text/javascript" src="../static/jquery-3.5.1.js "></script>
+</head>
+<body>
+<script language="javascript" type="text/javascript">
+    var loc = location.href;
+    var n1 = loc.length;//地址的总长度
+    var n2 = loc.indexOf("=");//取得=号的位置
+    var ids = decodeURI(loc.substr(n2 + 1, n1 - n2));//从=号后面的内容
+
+
+    window.onload = function () {
+        $.post("http://127.0.0.1:5000/select", {
+            id: ids
+        }, function (json) {
+            console.log(json)
+            jsonresult = json.result
+            console.log(jsonresult[0])
+            $('[name="name"]').val(jsonresult[0]['mobile_name']);
+            $('[name="model"]').val(jsonresult[0]['mobile_model']);
+            $('[name="color"]').val(jsonresult[0]['mobile_color']);
+            $('[name="price"]').val(jsonresult[0]['mobile_price']);
+            $('[name="owner"]').val(jsonresult[0]['owner']);
+        })
+        $('form').on('click', '.btnUpdate', function (e) {
+            console.log(e, 'e')
+            {# 组织冒泡：点击提交按钮，不调上面那个接口 #}
+            e.preventDefault();
+            $.post("http://127.0.0.1:5000/update", {
+                id: ids,
+                name: $('[name="name"]').val(),
+                model: $('[name="model"]').val(),
+                color: $('[name="color"]').val(),
+                price: $('[name="price"]').val(),
+                owner: $('[name="owner"]').val()
+            }, function (json) {
+                window.location.href = "http://127.0.0.1:5000"
+
+            })
+        })
+
+
+    }
+
+
+</script>
+<form>
+    <label>
+        设备名称：<input type="text"  name="name"><br>
+        设备版本：<input type="text" name="model" ><br>
+        设备颜色：<input type="text" name="color" ><br>
+        设备价格：<input type="text" name="price" ><br>
+        所属人：<input type="text" name="owner" ><br>
+    </label>
+
+        <input type="submit" class="btnUpdate">
+
+
+</form>
+
+</body>
+</html>
