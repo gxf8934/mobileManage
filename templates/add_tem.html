@@ -7,13 +7,16 @@
 </head>
 <body>
 
-<form>
-    <label>
+<form >
+    <label >
         设备名称：<input type="text" name="name"><br>
         设备版本：<input type="text" name="model"><br>
         设备颜色：<input type="text" name="color"><br>
         设备价格：<input type="text" name="price"><br>
         所属人：<input type="text" name="owner"><br>
+        <input name="label" type="radio" value="0"/>android
+        <input name="label" type="radio" value="1"/>ios
+        <input name="label" type="radio" value="2"/>pad
     </label>
     <input type="submit" class="btnAdd">
 
@@ -27,13 +30,14 @@
             e.preventDefault();
             console.log('1111')
 
-            $.post("http://127.0.0.1:5000/add", {
+            $.post("http://10.8.17.35:5000/add", {
 
                 name: $('[name="name"]').val(),
                 model: $('[name="model"]').val(),
                 color: $('[name="color"]').val(),
                 price: $('[name="price"]').val(),
-                owner: $('[name="owner"]').val()
+                owner: $('[name="owner"]').val(),
+                label:$('input:radio:checked').val()
             }, function (json) {
                 window.location.href = "http://127.0.0.1:5000"
             })

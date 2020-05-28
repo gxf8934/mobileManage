@@ -14,7 +14,7 @@
 
 
     window.onload = function () {
-        $.post("http://127.0.0.1:5000/select", {
+        $.post("http://10.8.17.35:5000/select", {
             id: ids
         }, function (json) {
             console.log(json)
@@ -25,20 +25,30 @@
             $('[name="color"]').val(jsonresult[0]['mobile_color']);
             $('[name="price"]').val(jsonresult[0]['mobile_price']);
             $('[name="owner"]').val(jsonresult[0]['owner']);
+            if (jsonresult[0]['mobile_label'] == 0) {
+                $("input[name=label]:eq(0)").prop("checked", 'checked');
+            }
+            if (jsonresult[0]['mobile_label'] == 1) {
+                $("input[name=label]:eq(1)").prop("checked", 'checked');
+            }
+            if (jsonresult[0]['mobile_label'] == 2) {
+                $("input[name=label]:eq(2)").prop("checked", 'checked');
+            }
         })
         $('form').on('click', '.btnUpdate', function (e) {
             console.log(e, 'e')
             {# 组织冒泡：点击提交按钮，不调上面那个接口 #}
             e.preventDefault();
-            $.post("http://127.0.0.1:5000/update", {
+            $.post("http://10.8.17.35:5000/update", {
                 id: ids,
                 name: $('[name="name"]').val(),
                 model: $('[name="model"]').val(),
                 color: $('[name="color"]').val(),
                 price: $('[name="price"]').val(),
-                owner: $('[name="owner"]').val()
+                owner: $('[name="owner"]').val(),
+                label: $('input:radio:checked').val()
             }, function (json) {
-                window.location.href = "http://127.0.0.1:5000"
+                window.location.href = "http://10.8.17.35:5000"
 
             })
         })
@@ -50,14 +60,17 @@
 </script>
 <form>
     <label>
-        设备名称：<input type="text"  name="name"><br>
-        设备版本：<input type="text" name="model" ><br>
-        设备颜色：<input type="text" name="color" ><br>
-        设备价格：<input type="text" name="price" ><br>
-        所属人：<input type="text" name="owner" ><br>
+        设备名称：<input type="text" name="name"><br>
+        设备版本：<input type="text" name="model"><br>
+        设备颜色：<input type="text" name="color"><br>
+        设备价格：<input type="text" name="price"><br>
+        所属人：<input type="text" name="owner"><br>
+        <input name="label" type="radio" value="0"/>android
+        <input name="label" type="radio" value="1"/>ios
+        <input name="label" type="radio" value="2"/>平板
     </label>
 
-        <input type="submit" class="btnUpdate">
+    <input type="submit" class="btnUpdate">
 
 
 </form>

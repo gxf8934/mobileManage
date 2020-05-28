@@ -18,12 +18,16 @@ def update_tem():
 # 查询数据
 @app.route('/select',methods=['post'])
 def select_mobile():
+    print('1111')
     mobile={
         'id':'',
-        'state':''
+        'state':'',
+        'mobile_label':''
     }
     mobile.update({'id':request.form.get('id')})
     mobile.update({'state':request.form.get('state')})
+    mobile.update({'mobile_label':request.form .get('mobile_label')})
+    print('2222')
     rows=db_select('mobile_manage',**mobile)
     print(rows)
     for i in rows:
@@ -42,13 +46,15 @@ def addMobile():
         'mobile_color':'',
         'mobile_price':'',
         'owner':'',
-        'state':''
+        'state':'',
+        'mobile_label':''
     }
     mobile.update({'mobile_model':request.form.get('model')})
     mobile.update({'mobile_name':request.form.get('name')})
     mobile.update({'mobile_color':request.form.get('color')})
     mobile.update({'mobile_price':request.form.get('price')})
     mobile.update({'owner':request.form.get('owner')})
+    mobile.update({'mobile_label':request.form.get('label')})
     mobile.update({'state':1})
     db_insert('mobile_manage',**mobile)
     return '添加成功'
@@ -74,13 +80,15 @@ def updateMobile():
         'mobile_name':'',
         'mobile_color':'',
         'mobile_price':'',
-        'owner':''
+        'owner':'',
+        'mobile_label':''
     }
     mobile.update({'mobile_model':request.form.get('model')})
     mobile.update({'mobile_name':request.form.get('name')})
     mobile.update({'mobile_color':request.form.get('color')})
     mobile.update({'mobile_price':request.form.get('price')})
     mobile.update({'owner':request.form.get('owner')})
+    mobile.update({'mobile_label':request.form.get('label')})
     db_update('mobile_manage',id,**mobile)
     return '成功'
 

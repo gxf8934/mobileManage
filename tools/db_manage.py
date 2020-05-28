@@ -88,13 +88,16 @@ def db_update(table, condition, **dict):
 
 # 查询数据sql
 def db_select(table, **dict):
-    sql = '''select * from {} where {}={} '''
+
     if (dict['state']!=None):
-        sql = sql.format(table, 'state', dict['state'])
+        sql = '''select * from {} where {}={} and {}={} '''
+        sql = sql.format(table, 'state', dict['state'],'mobile_label',dict['mobile_label'])
     else:
+        sql = '''select * from {} where {}={}  '''
         sql = sql.format(table, 'id', dict['id'])
     conn = db_connect()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    print(sql)
     cur.execute(sql)
     result = cur.fetchall()
     return result
