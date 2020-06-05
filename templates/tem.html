@@ -18,7 +18,7 @@
         <input name="label" type="radio"  value="2"/>平板
     </label>
 </form>
-<a href="http://10.8.17.35:5000/add_mobile">
+<a href="http://localhost:5000/add_mobile">
     <button>添加</button>
 </a>
 
@@ -38,7 +38,7 @@
 
 <script>
     window.onload = function () {
-        $.post("http://10.8.17.35:5000/select", {
+        $.post("http://localhost:5000/select", {
             state: '\'1\'',
             mobile_label: $('input:radio:checked').val()
         }, function (json) {
@@ -64,7 +64,7 @@
 
         $(':radio').click(function () {
 
-            $.post("http://10.8.17.35:5000/select", {
+            $.post("http://localhost:5000/select", {
                 state: '\'1\'',
                 mobile_label: $('input:radio:checked').val()
             }, function (json) {
@@ -110,7 +110,7 @@
             var b = confirm("您确认要删除该条数据吗？")
             if (b == true) {
 
-                $.post("http://10.8.17.35:5000/delete", {
+                $.post("http://localhost:5000/delete", {
                     id: $(this)[0].dataset.index,
                 }, function (json) {
                     window.location.reload();
@@ -118,7 +118,7 @@
             }
         })
         $('table').on('click', '.btnEdit', function () {
-            window.location.href = "http://10.8.17.35:5000/update_mobile?" + "id=" + $(this)[0].dataset.index;
+            window.location.href = "http://localhost:5000/update_mobile?" + "id=" + $(this)[0].dataset.index;
 
 
         })

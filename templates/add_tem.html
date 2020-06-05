@@ -30,7 +30,7 @@
             e.preventDefault();
             console.log('1111')
 
-            $.post("http://10.8.17.35:5000/add", {
+            $.post("http://localhost:5000/add", {
 
                 name: $('[name="name"]').val(),
                 model: $('[name="model"]').val(),
@@ -39,7 +39,7 @@
                 owner: $('[name="owner"]').val(),
                 label:$('input:radio:checked').val()
             }, function (json) {
-                window.location.href = "http://10.8.17.35:5000"
+                window.location.href = "http://localhost:5000"
             })
         })
     }

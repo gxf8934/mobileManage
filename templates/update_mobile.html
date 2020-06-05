@@ -14,7 +14,7 @@
 
 
     window.onload = function () {
-        $.post("http://10.8.17.35:5000/select", {
+        $.post("http://localhost:5000/select", {
             id: ids
         }, function (json) {
             console.log(json)
@@ -39,7 +39,7 @@
             console.log(e, 'e')
             {# 组织冒泡：点击提交按钮，不调上面那个接口 #}
             e.preventDefault();
-            $.post("http://10.8.17.35:5000/update", {
+            $.post("http://localhost:5000/update", {
                 id: ids,
                 name: $('[name="name"]').val(),
                 model: $('[name="model"]').val(),
@@ -48,7 +48,7 @@
                 owner: $('[name="owner"]').val(),
                 label: $('input:radio:checked').val()
             }, function (json) {
-                window.location.href = "http://10.8.17.35:5000"
+                window.location.href = "http://localhost:5000"
 
             })
         })
