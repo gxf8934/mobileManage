@@ -17,4 +17,5 @@ RUN . venv/bin/activate
 COPY requirments.txt /opt/app/
 RUN pip install -r /opt/app/requirments.txt -i https://pypi.douban.com/simple
 CMD ["pwd"]
+EXPOSE 5000
 CMD ["/bin/bash","run.sh"]
