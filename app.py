@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
 from flask import Flask, jsonify, render_template, request
 from tools.db_manage import db_connect,db_insert,db_update,db_delete,db_select
 from tools.time_conversion import date_to_timestamp,timestamp_to_date

@@ -14,7 +14,7 @@ WORKDIR /opt/app
 COPY . /opt/app/
 RUN virtualenv venv
 RUN . venv/bin/activate
-COPY requirements.txt /opt/app/
-RUN pip install -r /opt/app/requirements.txt -i https://pypi.douban.com/simple
+COPY requirments.txt /opt/app/
+RUN pip install -r /opt/app/requirments.txt -i https://pypi.douban.com/simple
 CMD ["pwd"]
 CMD ["/bin/bash","run.sh"]

@@ -1,2 +1,2 @@
 #!/bin/bash
-python schedule.py
+python app.py
